@@ -1,0 +1,3 @@
+[submodule "newster"]
+    path = app/newster
+    url = https://github.com/abramovd/Newster.git
