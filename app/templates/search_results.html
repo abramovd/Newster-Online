@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<h1>Newster</h1>
 <form action="{{ url_for('search') }}" method="post" name="search" value = "{{ query }}">
       {{ g.search_form.hidden_tag() }}
       <p>
