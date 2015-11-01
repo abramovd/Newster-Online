@@ -1,0 +1,14 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }} - News Search Results Clustering</title>
+    {% else %}
+    <title>Welcome to Newster</title>
+    {% endif %}
+  </head>
+  <body>
+    <div>Newster: <a href="/index">Home</a></div>
+    <hr>
+    {% block content %}{% endblock %}
+  </body>
+</html>
