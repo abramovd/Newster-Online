@@ -5,3 +5,32 @@ body {
   padding: 40px 15px;
   text-align: center;
 }
+
+.radio-toolbar input[type="radio"] {
+    display:none;
+}
+
+.radio-toolbar label {
+    display:inline-block;
+    background-color:#ddd;
+    padding:4px 11px;
+    font-family:Arial;
+    font-size:16px;
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+    background-color:red;
+}
+
+.search input[type="submit"] {
+                position:relative;
+                padding:1px 25px;
+                left:-4px;
+                border:2px solid #207cca;
+                background-color:#207cca;
+                color:#fafafa;
+}
+.search input[type="submit"]:hover  {
+                background-color:#fafafa;
+                color:#207cca;
+}

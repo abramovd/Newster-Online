@@ -12,13 +12,44 @@ $('.read-more-toggle').on('click', function() {
 
 <h1>Newster</h1>
 <form action="{{ url_for('search') }}" method="post" name="search">
+    <div class = 'search'>  
       {{ g.search_form.hidden_tag() }}
-      <p>
-          {{ g.search_form.search(size=40, value = query) }}
-      </p>
-      <p><input type="submit" value="Search"></p>
+          {{ g.search_form.search(size=40) }} 
+      <input type="submit" value = 'Search'>
+    </div>
+    <br>
+      <div class = "radio-toolbar">
+      				<label style = "background-color:white; padding:2px 1px;"> <h4>Method:</h4> </label>
+                    <input type="radio" id = "kmeans" name="algorithm" value="kmeans"
+                    {%if method == 'kmeans'%} checked {%endif%}>
+                    <label for = 'kmeans'> Kmeans </label>
+                    </input>
+                    <input type="radio" id = "stc" name = "algorithm" value="stc"
+                    {%if method == 'stc'%} checked {%endif%}>
+                    <label for = 'stc'> STC </label>
+                    </input>
+                    <input type="radio" id = "fca" name = "algorithm" value="fca"
+                    {%if method == 'fca'%} checked {%endif%}>
+                    <label for = 'fca'> FCA </label>
+                    </input>
+                    <input type="radio" id = "ward" name = "algorithm" value="ward"
+                    {%if method == 'ward'%} checked {%endif%}>
+                    <label for = 'ward'> Ward </label>
+                    </input>
+                </div>
+            <div class = "select">
+            <label style = "background-color:white; padding:2px 10px;"> <h4> Number of Clusters: </h4> </label>
+                <select name = "clusters">
+                {%for i in range(20)%}
+                <option value="{{i + 1}}" {% if i == n_clusters - 1 %} selected {%endif%}>
+                {{i + 1}}
+                </option>
+                {%endfor%}
+                </select>
+                </div>
     </form><br>
     {% if snippets %}
+    {% if snippets|length >= n_clusters %}
     {% for key in clusters.iterkeys()|sort %}
         {% set cluster = clusters[key] %}
         {%if key % 2 == 1 %}
@@ -36,8 +67,8 @@ $('.read-more-toggle').on('click', function() {
             <hr>
             <h4><b><a href = "{{ links[cl] }}">{{ titles[cl] }}</a></b></h4>
              <font color = "green"> {{ links[cl] }}</font><br>
-             &nbsp;{{ snippets[cl] }}<br>
-             <p>&nbsp;Source: <b>{{ sources[cl] }}</b></p>
+             {{ snippets[cl] }}<br>
+             Source: <b>{{ sources[cl] }}</b>
             {%if loop.index == 1 and (cluster|length) > 1%}
             <a href = "#" onclick="return false" class="read-more-toggle">
             <center>More news
@@ -56,6 +87,10 @@ $('.read-more-toggle').on('click', function() {
         {%endif%}
     {% endfor %}
     {% else %}
-    <dif><p>Sorry. No search results for your query :(</p></div>
+    <div><p>Sorry. The Number of chosen clusters is less then the number of
+        found articles  :(</p></div>
+    {% endif %}
+    {% else %}
+    	<div><p>Sorry. No search results for your query :(</p></div>
     {% endif %}
 {% endblock %}
