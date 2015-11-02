@@ -26,8 +26,8 @@ def search():
 
 @app.route('/search_results/<query>')          
 def search_results(query):
-    from newster.base import Newster
-    from newster.config import api_urls, api_keys
+    from tools.newster.base import Newster
+    from tools.newster.config import api_urls, api_keys
     try:
         newster = Newster(api_urls, api_keys, query)
         snippets = newster.get_snippets()
