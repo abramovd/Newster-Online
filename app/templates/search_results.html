@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
+    <script>
+// Hide the extra content initially, using JS so that if JS is disabled, no problemo.
+$('.read-more-content').addClass('hide');
+
+// Set up the toggle.
+$('.read-more-toggle').on('click', function() {
+  $(this).next('.read-more-content').toggleClass('hide');
+});
+    </script>
+
 <h1>Newster</h1>
 <form action="{{ url_for('search') }}" method="post" name="search">
       {{ g.search_form.hidden_tag() }}
@@ -7,26 +17,43 @@
           {{ g.search_form.search(size=40, value = query) }}
       </p>
       <p><input type="submit" value="Search"></p>
-    </form>
-    <h1>Search results for "{{ query }}"</h1>
+    </form><br>
     {% if snippets %}
     {% for key in clusters.iterkeys()|sort %}
         {% set cluster = clusters[key] %}
+        {%if key % 2 == 1 %}
         <div class="row">
+        {%endif%}
         <div class="col-lg-6">
-          <div class="panel panel-default" id="headings" style = "text-align: justify">
-            <div class="panel-heading"> Cluster #{{ key }}
+          <div class="panel panel-default" id="headings" style = "text-align: justify; height : 50%">
+            <div class="panel-heading"> <h2>Cluster {{ key }}: {{cluster|length}} items </h2>
             </div>
+            <article>
             {% for cl in cluster %}
-             <p><b>{{ snippets[cl] }}</b></p>
-             <p><b>{{ titles[cl] }}</b></p>
-             <p><b>{{ links[cl] }}</b></p>
-             <p><b>{{ sources[cl] }}</b></p>
-             ---------------------<br>
+            {%if loop.index == 2%}
+             <div class="read-more-content">
+            {%endif%}
+            <hr>
+            <h4><b><a href = "{{ links[cl] }}">{{ titles[cl] }}</a></b></h4>
+             <font color = "green"> {{ links[cl] }}</font><br>
+             &nbsp;{{ snippets[cl] }}<br>
+             <p>&nbsp;Source: <b>{{ sources[cl] }}</b></p>
+            {%if loop.index == 1 and (cluster|length) > 1%}
+            <a href = "#" onclick="return false" class="read-more-toggle">
+            <center>More news
+            </center><br>
+            </a>
+            {%endif%}
+            {%if loop.index >= 2 and loop.last%}
+            </div>
+            {%endif%}
             {% endfor %}
+             </article>
           </div>
          </div>
-        <div>
+        {%if key % 2 == 0 or loop.last %}
+        </div>
+        {%endif%}
     {% endfor %}
     {% else %}
     <dif><p>Sorry. No search results for your query :(</p></div>
