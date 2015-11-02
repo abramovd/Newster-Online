@@ -28,9 +28,21 @@ def search():
 def search_results(query):
     from newster.base import Newster
     from newster.config import api_urls, api_keys
-    newster = Newster(api_urls, api_keys, query)
-    snippets = newster.get_snippets()
+    try:
+        newster = Newster(api_urls, api_keys, query)
+        snippets = newster.get_snippets()
+        titles = newster.get_titles()
+        links = newster.get_links()
+        sources = newster.get_sources()
+        clusters = newster.find_clusters(method = 'kmeans', n_clusters = 10)
+    except:
+        titles = []
+        snippets = []
     return render_template("search_results.html",
                            title='Search Results',
                            query = query,
-                           snippets = snippets)  
+                           snippets = snippets,
+                           titles = titles,
+                           clusters = clusters,
+                           links = links,
+                           sources = sources)  

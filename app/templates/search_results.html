@@ -1,18 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Newster</h1>
-<form action="{{ url_for('search') }}" method="post" name="search" value = "{{ query }}">
+<form action="{{ url_for('search') }}" method="post" name="search">
       {{ g.search_form.hidden_tag() }}
       <p>
-          {{ g.search_form.search(size=40) }}
+          {{ g.search_form.search(size=40, value = query) }}
       </p>
       <p><input type="submit" value="Search"></p>
-    </form><br>
+    </form>
     <h1>Search results for "{{ query }}"</h1>
     {% if snippets %}
-        {% for snippet in snippets %}
-        <div><p>snippet #{{ loop.index }} : <b>{{ snippet }}</b></p></div>
-        {% endfor %}
+    {% for key in clusters.iterkeys()|sort %}
+        {% set cluster = clusters[key] %}
+        <div class="row">
+        <div class="col-lg-6">
+          <div class="panel panel-default" id="headings" style = "text-align: justify">
+            <div class="panel-heading"> Cluster #{{ key }}
+            </div>
+            {% for cl in cluster %}
+             <p><b>{{ snippets[cl] }}</b></p>
+             <p><b>{{ titles[cl] }}</b></p>
+             <p><b>{{ links[cl] }}</b></p>
+             <p><b>{{ sources[cl] }}</b></p>
+             ---------------------<br>
+            {% endfor %}
+          </div>
+         </div>
+        <div>
+    {% endfor %}
     {% else %}
     <dif><p>Sorry. No search results for your query :(</p></div>
     {% endif %}
