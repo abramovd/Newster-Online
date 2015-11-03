@@ -52,6 +52,12 @@ $('.read-more-toggle').on('click', function() {
         </div>
     </form>
     <h4>Found <u>{{snippets|length}} articles</u> on <b>The New York Times</b> and <b>The Guardian</b></h4>
+    {% if method == 'stc' %}
+    	{% if good_clusters < n_clusters %}
+    		<h4> <i>Suffix Tree Clustering algorithm is sure only about first 
+    		<b> {{ good_clusters }} clusters.</b> </i> Be careful! </h4>
+    	{% endif %}
+    {% endif %}
     <br>
     {% if snippets %}
     {% if method == 'list' %}
