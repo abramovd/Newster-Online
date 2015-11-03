@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
+     <div class = 'search' style = "padding-top: 130px;">
     <h1>Newster</h1>
     <form action="{{ url_for('search') }}" method="post" name="search">
-    <div class = 'search'>  
       {{ g.search_form.hidden_tag() }}
           {{ g.search_form.search(size=40) }} 
       <input type="submit" value = 'Search'>
-    </div>
-    <br>
+	
       				<div class = "radio-toolbar" id = "rad">
       				<label style = "background-color:white; padding:2px 1px;"> <h4>Method:</h4> </label>
                     <input type="radio" id = "kmeans" name="algorithm" value="kmeans" checked required>
@@ -21,10 +20,13 @@
                     </input>
                     <input type="radio" id = "ward" name = "algorithm" value="ward">
                     <label for = 'ward'> Ward </label>
+                    
+                    <input type="radio" id = "list" name = "algorithm" value="list">
+                    <label for = 'list'> Standard </label> 
                     </input>
-                </div> 
-                <div class = "select">
-                <label style = "background-color:white; padding:2px 10px;"> <h4> Number of Clusters: </h4> </label>
+                    
+                </div>
+                <label style = "background-color:white; padding:0px 10px;"> <h4> Number of Clusters: </h4> </label>
                 <select name = "clusters">
                 {%for i in range(20)%}
                 <option value="{{i + 1}}" {% if i == 9 %} selected {%endif%}>
@@ -33,5 +35,6 @@
                 {%endfor%}
                 </select>
                 </div>
+            </div>
     </form>
 {% endblock %}

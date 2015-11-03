@@ -31,12 +31,20 @@ def search_results(method, n_clusters, query):
     from tools.newster.base import Newster
     from tools.newster.config import api_urls, api_keys
     try:
+        newster = None
         newster = Newster(api_urls, api_keys, query)
         snippets = newster.get_snippets()
         titles = newster.get_titles()
         links = newster.get_links()
         sources = newster.get_sources()
-        clusters = newster.find_clusters(method = method, n_clusters = int(n_clusters))
+        m = 'ok'
+        try:
+            newster = None
+            newster = Newster(api_urls, api_keys, query)
+            clusters = newster.find_clusters(method = method, n_clusters = int(n_clusters))
+        except Exception, e:
+            clusters = {}
+            m = str(e)
     except:
         titles = []
         links = []
@@ -53,4 +61,4 @@ def search_results(method, n_clusters, query):
                            links = links,
                            sources = sources,
                            n_clusters = int(n_clusters),
-                           method = method)  
+                           method = method, m = m)  
