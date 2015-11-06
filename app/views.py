@@ -48,13 +48,16 @@ def search_results(method, n_clusters, query):
         except Exception, e:
             clusters = {}
             err = str(e)
-    except:
+    except Exception, e:
         titles = []
         links = []
         snippets = []
         titles = []
         sources = []
+        tags = []
+        good_clusters = 0
         clusters = {}
+        err = str(e)
     return render_template("search_results.html",
                            title='Search Results',
                            query = query,
