@@ -34,3 +34,25 @@
                 background-color:#fafafa;
                 color:#207cca;
 }
+
+p.imp {
+    margin: 5px; 
+    padding: 2px;
+    display: inline;
+    border-style: solid; 
+    border-width: 1px;
+}
+
+p.tag {
+display: inline;
+font-size: 13pt;
+}
+
+p.tag2 {
+display: inline;
+font-size: 14pt;
+}
+
+p.imp {
+    background-color: #9CBBEB;
+}

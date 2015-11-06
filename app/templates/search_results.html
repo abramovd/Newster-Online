@@ -79,7 +79,30 @@ $('.read-more-toggle').on('click', function() {
         {%endif%}
         <div class="col-lg-6">
           <div class="panel panel-default" id="headings" style = "text-align: justify; height : 50%">
-            <div class="panel-heading"> <h2>Cluster {{ key }}: {{cluster|length}} items </h2>
+            <div class="panel-heading"> 
+            <table border = "0" width = "100%">
+            <tr>
+            <td>
+            <p class = "tag2"> <b>#{{ key }}: 
+            {{cluster|length}} 
+            {% if cluster|length == 1 %}
+            item
+            {%else %}
+            items
+            {% endif %}
+             </b></p>
+            </td>
+            <td align = "right">
+            {% if method != "ward" %}
+            <p class = "tag"> <b> Tags: </b> </p>
+                {% for tag in tags[key] %}
+                   <p class = "imp"> #{{tag}}
+                   </p>
+                {% endfor %}
+            </td>
+            {% endif%}
+            </tr>
+            </table>
             </div>
             <article>
             {% for cl in cluster %}
