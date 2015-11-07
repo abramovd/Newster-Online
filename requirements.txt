@@ -7,7 +7,7 @@ WTForms==2.0.2
 bdecorator==4.0.4
 gunicorn==19.3.0
 nltk==3.0.2
-numpy==1.9.2
+numpy==1.7.0
+scipy==0.11.0
 scikit-learn==0.13.1
-scipy==0.15.1
 simplejson==3.8.0
