@@ -1,5 +1,4 @@
 # Newster Online
----
 **Newster Online** is a Flask application based on [Newster](https://github.com/abramovd/Newster) package which is used for searching news on such websites as The Guardian and The New York Times. It returns the search results not in a common listed form (e.g. Google Search), but it uses some clustering techinuques to automaically divide results into groups based on news snippets.
 
 
@@ -88,9 +87,7 @@ OK. Now Newster Online should work just fine.
 Newster Online interface gives you an opportunity too choose what algorithms to run and specify the desired number of clusters. After you write your query in a text field and click "Search" you will see all the results. For every cluster Newster Online provides tags to describe grouped articles and explain its decision.
 
 ## Online Implementation
----
 Newster Online is implemented on Heroku Server: newster2.herokuapp.com. If you see the message "Application Offline for Maintenance" you should get in touch with me: diabramo@ya.ru.
 
 ## Author
----
 Dmitry Abramov &copy;
