@@ -44,9 +44,10 @@ def search_results(method, n_clusters, query):
                 good_clusters = newster.get_number_of_good_clusters()
             if method != 'ward':
                 tags = newster.get_common_tags(2)
-        except:
+        except Exception, e:
             clusters = {}
-    except:
+            err = str(e)
+    except Exception, e:
         titles = []
         links = []
         snippets = []
@@ -55,6 +56,7 @@ def search_results(method, n_clusters, query):
         tags = []
         good_clusters = 0
         clusters = {}
+        err = str(e)
     return render_template("search_results.html",
                            title='Search Results',
                            query = query,
@@ -65,4 +67,5 @@ def search_results(method, n_clusters, query):
                            sources = sources,
                            n_clusters = int(n_clusters),
                            method = method, tags = tags,
-                           good_clusters = good_clusters)  
+                           good_clusters = good_clusters,
+                           err = err)

@@ -72,6 +72,9 @@ $('.read-more-toggle').on('click', function() {
         {%endfor %}
     {% else %}
     {% if snippets|length >= n_clusters %}
+    {% if err != 'ok' %}
+    Error: {{err}}
+    {% endif %}
     {% for key in clusters.iterkeys()|sort %}
         {% set cluster = clusters[key] %}
         {%if key % 2 == 1 %}
