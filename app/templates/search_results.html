@@ -64,7 +64,7 @@ $('.read-more-toggle').on('click', function() {
         {% for num in range(snippets|length) %}
             <center>
             <div class="panel panel-default" id="headings" style = "text-align: justify; width: 600px; height : 100%">
-            <div class="panel-heading"><h4> <b><a href = "{{ links[num] }}">{{ titles[num] }}</a></b> <h4>
+            <div class="panel-heading"><h4> <b><a href = "{{ links[num] }}" target="_blank">{{ titles[num] }}</a></b> <h4>
             <font color = "green"> {{ links[num] }}</font><br><br>
              {{ snippets[num] }}<br><br>
              Source: <b>{{ sources[num] }}</b></div>
@@ -113,7 +113,7 @@ $('.read-more-toggle').on('click', function() {
              <div class="read-more-content">
             {%endif%}
             <hr>
-            <h4><b><a href = "{{ links[cl] }}">{{ titles[cl] }}</a></b></h4>
+            <h4><b><a href = "{{ links[cl] }}" target="_blank">{{ titles[cl] }}</a></b></h4>
              <font color = "green"> {{ links[cl] }}</font><br>
              {{ snippets[cl] }}<br>
              Source: <b>{{ sources[cl] }}</b>
